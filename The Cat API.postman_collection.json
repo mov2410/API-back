@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "334f5a6d-a0a7-4575-963f-88c469b3319d",
 		"name": "The Cat API",
-		"description": "![image](https://cdn2.thecatapi.com/logos/thecatapi_256xW.png)\n\n## An open, free, read & write API all about Cats\nThe Cat API gives you access to 10000's of cat images\n- Upload your own images\n- Favourite or Vote on images\n- Get stats on your requests\n- Save a custom value with each request for each of your users\n\n## How is this free?\nMy goal is to create free, fun & useful public service API's, helping people learn to code, create awesome projects, and be a stable fixture in a turbulent world.\n\n## How do i get access?\nJust signup for an API Key from https://theCatAPI.com for free. I'm looking forward to seeing what you make!",
+		"description": "<img src=\"https://cdn2.thecatapi.com/logos/thecatapi_256xW.png\" alt=\"image\" width=\"421\" height=\"321\">\n\n## An open, free, read & write API all about Cats\n\nThe Cat API gives you access to 10000's of cat images\n\n- Upload your own images\n- Favourite or Vote on images\n- Get stats on your requests\n- Save a custom value with each request for each of your users\n    \n\n## How is this free?\n\nMy goal is to create free, fun & useful public service API's, helping people learn to code, create awesome projects, and be a stable fixture in a turbulent world.\n\n## How do i get access?\n\nJust signup for an API Key from [https://theCatAPI.com](https://theCatAPI.com) for free. I'm looking forward to seeing what you make!",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29781400"
 	},
@@ -19,16 +19,27 @@
 								"exec": [
 									"pm.test(\"Check if response has at least one image\", function () {",
 									"    const images = pm.response.json();",
-									"    pm.expect(images).to.be.an('array').and.to.have.lengthOf.at.least(1);",
-									"    if (images.length > 0) {",
-									"        // pm.expect(images[0]).to.have.property('id');",
-									"        pm.expect(images[0]).to.have.all.keys('id', 'url', 'width', 'height');",
-									"        pm.environment.set(\"EmageIDforAnalysis\", images[0].id);",
-									"    } else {",
-									"        pm.expect.fail(\"No images in the storage\");",
-									"    }",
+									"    pm.expect(images).to.be.an('array').and.to.have.lengthOf.at.least(1)",
 									"});",
 									"",
+									"pm.test(\"Check if the id of getting image saved as a collection variable\", function () {",
+									"    const images = pm.response.json();",
+									"    var ID = images[0].id;",
+									"    pm.collectionVariables.set(\"EmageIDforAnalysis\", ID);",
+									"    var emageID = pm.collectionVariables.get(\"EmageIDforAnalysis\");",
+									"    pm.expect(emageID).to.be.equal(ID);",
+									"    console.log(\"EmageIDforAnalysis:\", emageID);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
 								"type": "text/javascript"
@@ -52,12 +63,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=10",
+							"raw": "{{endpoint}}images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
 								"search"
 							],
 							"query": [
@@ -92,11 +102,6 @@
 									"description": "[optional] paginate through results"
 								},
 								{
-									"key": "limit",
-									"value": "10",
-									"description": "[optional] number of results to return, up to 25 with a valid API-Key"
-								},
-								{
 									"key": "include_breeds",
 									"value": "1",
 									"description": "[optional] default to true. Adds the 'breed' object ot the image, only if an api",
@@ -107,6 +112,10 @@
 									"value": "1",
 									"description": "[optional] default to true. Adds the 'breed' object ot the image, only if an api",
 									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1"
 								}
 							]
 						},
@@ -169,12 +178,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}v1/images/{{EmageIDforAnalysis}}",
+							"raw": "{{endpoint}}images/{{EmageIDforAnalysis}}",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
 								"{{EmageIDforAnalysis}}"
 							]
 						},
@@ -197,14 +205,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}v1/images/:image_id/analysis",
+							"raw": "{{endpoint}}images/:image_id",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
-								":image_id",
-								"analysis"
+								":image_id"
 							],
 							"query": [
 								{
@@ -223,10 +229,227 @@
 						},
 						"description": "Get the raw analysis results for any uploaded image"
 					},
+					"response": [
+						{
+							"name": "/images/:image_id/analysis",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "live_6nDJK6odBUS2dtWkJDdoQmBgmfGP76soZm0kPNheW4uactGsFTS4z6fh6HwrQJgl",
+										"description": "[optional]  will save this request to your account analytics\n"
+									}
+								],
+								"url": {
+									"raw": "https://api.thecatapi.com/v1/images/:image_id/image analysis",
+									"protocol": "https",
+									"host": [
+										"api",
+										"thecatapi",
+										"com"
+									],
+									"path": [
+										"v1",
+										"images",
+										":image_id",
+										"image analysis"
+									],
+									"query": [
+										{
+											"key": "sub_id",
+											"value": "",
+											"description": "[optional] if you want to save this request to your account stats",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "image_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "/images/:image_id/info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response is an object with id, url, breeds, width, and height properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object').that.has.all.keys('id', 'url', 'breeds', 'width', 'height');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Width and height are non-negative integers\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.width).to.be.a('number').and.to.be.at.least(0);\r",
+									"  pm.expect(responseData.height).to.be.a('number').and.to.be.at.least(0);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Image URL is a non-empty string and in a valid format\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.url).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"  pm.expect(responseData.url).to.match(/^http(s)?:\\/\\/.+/);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Confirm that the response does not contain any unexpected properties\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    const expectedProperties = [\"id\", \"url\", \"breeds\", \"width\", \"height\"];\r",
+									"    const actualProperties = Object.keys(responseData);\r",
+									"    pm.expect(actualProperties).to.have.members(expectedProperties);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}",
+								"description": "[optional]  will save this request to your account analytics\n"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}images/{{EmageIDforAnalysis}}",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
+								"{{EmageIDforAnalysis}}"
+							]
+						},
+						"description": "Check if an image uploaded.\n\nReturn 1 image matching the id passed."
+					},
 					"response": []
 				},
 				{
-					"name": "/images/ (my uploads)",
+					"name": "/images/upload image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"\r",
+									"// Stores the image ID and URL in a collection variables\r",
+									"var imageID = pm.response.json().id;\r",
+									"var imageURL = pm.response.json().url;\r",
+									"pm.collectionVariables.set(\"Added_imageID\", imageID);\r",
+									"pm.collectionVariables.set(\"Added_imageURL\", imageURL);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}",
+								"description": "[required] - saves the uploaded image to your account."
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "MyCat1.jpg"
+								},
+								{
+									"key": "sub_id",
+									"value": "",
+									"description": "[optional] - a string you can use to segment your images, e.g. knowing which of your own users uploaded it.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "breed_ids",
+									"value": "",
+									"description": "[optional] comma separated string of breed ids contained in the image",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endpoint}}images/upload",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
+								"upload"
+							]
+						},
+						"description": "Upload an image"
+					},
+					"response": []
+				},
+				{
+					"name": "/images/ check uploaded images",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Confirm that the image added\", function () {\r",
+									"    var responseJson = pm.response.json();\r",
+									"    var idToCheck = pm.collectionVariables.get(\"Added_imageID\");\r",
+									"    console.log('ID Record added:', idToCheck);\r",
+									"    var isrecordFound = false;\r",
+									"    responseJson.forEach(function(record) {\r",
+									"        if (record.id === idToCheck) {\r",
+									"            isrecordFound = true;\r",
+									"            return;\r",
+									"        }\r",
+									"    });\r",
+									"    console.log('Record added?:', isrecordFound);\r",
+									"    pm.expect(isrecordFound).to.be.equal(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -239,17 +462,180 @@
 							},
 							{
 								"key": "x-api-key",
-								"value": "DEMO-API-KEY",
+								"value": "{{YOUR-API-KEY}}",
 								"description": "[required] - will return all the images from your account\n"
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}v1/images/?limit=10&page=0&order=DESC",
+							"raw": "{{endpoint}}images/?limit=10&page=0&order=DESC",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "[Optional] number of images to return valid  1 to 10 - default: 1"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"description": "[Optional] only works if account_id is present to page through your own uploads"
+								},
+								{
+									"key": "order",
+									"value": "DESC",
+									"description": "[Optional] only works if account_id is present, either ASC or DESC - ascending or descending."
+								},
+								{
+									"key": "sub_id",
+									"value": "user1",
+									"description": "[Optional] If you want to ",
+									"disabled": true
+								},
+								{
+									"key": "breed_ids",
+									"value": "1,4,28",
+									"description": "[Optional] Id's of the breeds to filter by",
+									"disabled": true
+								},
+								{
+									"key": "category_ids",
+									"value": "4",
+									"description": "[Optional] Id's of the categories to filter by",
+									"disabled": true
+								},
+								{
+									"key": "format",
+									"value": "json",
+									"description": "[Optional] default is 'json', pass 'src' to redirect the request to the image's url - this is useful for setting the 'src' of an <img> tag.",
+									"disabled": true
+								},
+								{
+									"key": "original_filename",
+									"value": "",
+									"description": "[Optiona] filter to files you uploaded with the same name",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"description": "[Optional] default applied your unique user_id from welcome email, filter to only show images from your account that you have uploaded",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Only returns images from your account, uploaded via 'api/v1/images/upload'"
+					},
+					"response": []
+				},
+				{
+					"name": "/images/delete image  uploaded",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.eql(204);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.unset(\"Added_imageID\");\r",
+									"pm.collectionVariables.unset(\"Added_imageURL\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{endpoint}}images/:image_id",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
+								":image_id"
+							],
+							"variable": [
+								{
+									"key": "image_id",
+									"value": "{{Added_imageID}}"
+								}
+							]
+						},
+						"description": "Delete uploaded image"
+					},
+					"response": []
+				},
+				{
+					"name": "/images/ check that image deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Confirm that the image deleted\", function () {\r",
+									"    var responseJson = pm.response.json();\r",
+									"    var idToCheck = pm.collectionVariables.get(\"Added_imageID\");;\r",
+									"    var isrecordFound = false;\r",
+									"    responseJson.forEach(function(record) {\r",
+									"        if (record.id === idToCheck) {\r",
+									"            isrecordFound = false;\r",
+									"            return;\r",
+									"        }\r",
+									"    });\r",
+									"    pm.expect(isrecordFound).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}",
+								"description": "[required] - will return all the images from your account\n"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}images/?limit=10&page=0&order=DESC",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
 								""
 							],
 							"query": [
@@ -317,12 +703,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
 									"\r",
 									"// Stores the image ID and URL in a global variables\r",
 									"var imageID = pm.response.json().id;\r",
 									"var imageURL = pm.response.json().url;\r",
-									"pm.globals.set(\"Added_imageID\", imageID);\r",
-									"pm.globals.set(\"Added_imageURL\", imageURL);\r",
+									"pm.collectionVariables.set(\"Added_imageID\", imageID);\r",
+									"pm.collectionVariables.set(\"Added_imageURL\", imageURL);\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -340,192 +730,9 @@
 								"value": "multipart/form-data",
 								"disabled": true
 							},
-							{
-								"key": "x-api-key",
-								"value": "DEMO-API-KEY",
-								"description": "[required] - saves the uploaded image to your account."
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "MyCat1.jpg"
-								},
-								{
-									"key": "sub_id",
-									"value": "",
-									"description": "[optional] - a string you can use to segment your images, e.g. knowing which of your own users uploaded it.",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "breed_ids",
-									"value": "",
-									"description": "[optional] comma separated string of breed ids contained in the image",
-									"type": "text",
-									"disabled": true
-								}
-							]
-						},
-						"url": {
-							"raw": "{{endpoint}}v1/images/upload",
-							"host": [
-								"{{endpoint}}v1"
-							],
-							"path": [
-								"images",
-								"upload"
-							]
-						},
-						"description": "Upload an image"
-					},
-					"response": []
-				},
-				{
-					"name": "/images/:image_id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"pm.test(\"Response is an object with id, url, breeds, width, and height properties\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.be.an('object').that.has.all.keys('id', 'url', 'breeds', 'width', 'height');\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Width and height are non-negative integers\", function () {\r",
-									"  const responseData = pm.response.json();\r",
-									"  pm.expect(responseData).to.be.an('object');\r",
-									"  pm.expect(responseData.width).to.be.a('number').and.to.be.at.least(0);\r",
-									"  pm.expect(responseData.height).to.be.a('number').and.to.be.at.least(0);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"Image URL is a non-empty string and in a valid format\", function () {\r",
-									"  const responseData = pm.response.json();\r",
-									"  pm.expect(responseData).to.be.an('object');\r",
-									"  pm.expect(responseData.url).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
-									"  pm.expect(responseData.url).to.match(/^http(s)?:\\/\\/.+/);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"Confirm that the response does not contain any unexpected properties\", function () {\r",
-									"    const responseData = pm.response.json();\r",
-									"    const expectedProperties = [\"id\", \"url\", \"breeds\", \"width\", \"height\"];\r",
-									"    const actualProperties = Object.keys(responseData);\r",
-									"    pm.expect(actualProperties).to.have.members(expectedProperties);\r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
 							{
 								"key": "x-api-key",
 								"value": "{{YOUR-API-KEY}}",
-								"description": "[optional]  will save this request to your account analytics\n"
-							}
-						],
-						"url": {
-							"raw": "{{endpoint}}v1/images/{{EmageIDforAnalysis}}",
-							"host": [
-								"{{endpoint}}v1"
-							],
-							"path": [
-								"images",
-								"{{EmageIDforAnalysis}}"
-							]
-						},
-						"description": "Check if an image uploaded.\n\nReturn 1 image matching the id passed."
-					},
-					"response": []
-				},
-				{
-					"name": "/images/:image_id",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "x-api-key",
-								"value": "DEMO-API-KEY"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{endpoint}}v1/images/:image_id",
-							"host": [
-								"{{endpoint}}v1"
-							],
-							"path": [
-								"images",
-								":image_id"
-							],
-							"variable": [
-								{
-									"key": "image_id",
-									"value": "{{Added_imageID}}"
-								}
-							]
-						},
-						"description": "Delete uploaded image"
-					},
-					"response": []
-				},
-				{
-					"name": "/images/upload",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"// Stores the image ID and URL in a global variables\r",
-									"var imageID = pm.response.json().id;\r",
-									"var imageURL = pm.response.json().url;\r",
-									"pm.globals.set(\"Added_imageID\", imageID);\r",
-									"pm.globals.set(\"Added_imageURL\", imageURL);\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"disabled": true
-							},
-							{
-								"key": "x-api-key",
-								"value": "DEMO-API-KEY",
 								"description": "[required] - saves the uploaded image to your account."
 							}
 						],
@@ -554,16 +761,125 @@
 							]
 						},
 						"url": {
-							"raw": "{{endpoint}}v1/images/upload",
+							"raw": "{{endpoint}}images/upload",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
 								"upload"
 							]
 						},
 						"description": "Upload another image"
+					},
+					"response": []
+				},
+				{
+					"name": "/images/ check uploaded images",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Confirm that the image added\", function () {\r",
+									"    var responseJson = pm.response.json();\r",
+									"    var idToCheck = pm.collectionVariables.get(\"Added_imageID\");\r",
+									"    console.log('ID Record added:', idToCheck);\r",
+									"    var isrecordFound = false;\r",
+									"    responseJson.forEach(function(record) {\r",
+									"        if (record.id === idToCheck) {\r",
+									"            isrecordFound = true;\r",
+									"            return;\r",
+									"        }\r",
+									"    });\r",
+									"    console.log('Record added?:', isrecordFound);\r",
+									"    pm.expect(isrecordFound).to.be.equal(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}",
+								"description": "[required] - will return all the images from your account\n"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}images/?limit=10&page=0&order=DESC",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "[Optional] number of images to return valid  1 to 10 - default: 1"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"description": "[Optional] only works if account_id is present to page through your own uploads"
+								},
+								{
+									"key": "order",
+									"value": "DESC",
+									"description": "[Optional] only works if account_id is present, either ASC or DESC - ascending or descending."
+								},
+								{
+									"key": "sub_id",
+									"value": "user1",
+									"description": "[Optional] If you want to ",
+									"disabled": true
+								},
+								{
+									"key": "breed_ids",
+									"value": "1,4,28",
+									"description": "[Optional] Id's of the breeds to filter by",
+									"disabled": true
+								},
+								{
+									"key": "category_ids",
+									"value": "4",
+									"description": "[Optional] Id's of the categories to filter by",
+									"disabled": true
+								},
+								{
+									"key": "format",
+									"value": "json",
+									"description": "[Optional] default is 'json', pass 'src' to redirect the request to the image's url - this is useful for setting the 'src' of an <img> tag.",
+									"disabled": true
+								},
+								{
+									"key": "original_filename",
+									"value": "",
+									"description": "[Optiona] filter to files you uploaded with the same name",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"description": "[Optional] default applied your unique user_id from welcome email, filter to only show images from your account that you have uploaded",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Only returns images from your account, uploaded via 'api/v1/images/upload'"
 					},
 					"response": []
 				},
@@ -616,15 +932,19 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}v1/images/:image_id/breeds",
+							"raw": "{{endpoint}}images/:image_id/breeds",
 							"host": [
-								"{{endpoint}}v1"
+								"{{endpoint}}images"
 							],
 							"path": [
-								"images",
 								":image_id",
 								"breeds"
 							],
@@ -636,6 +956,58 @@
 							]
 						},
 						"description": "This endpoint retrieves a list of breeds associated with a specific image, identified by the provided image ID.\n\nNo request body is required for this GET request.\n\n### Response\n\n- Status: 200\n- Body: An array containing the breeds associated with the specified image."
+					},
+					"response": []
+				},
+				{
+					"name": "/images/delete image  uploaded",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.unset(\"Added_imageID\");\r",
+									"pm.collectionVariables.unset(\"Added_imageURL\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{YOUR-API-KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{endpoint}}images/:image_id",
+							"host": [
+								"{{endpoint}}images"
+							],
+							"path": [
+								":image_id"
+							],
+							"variable": [
+								{
+									"key": "image_id",
+									"value": "{{Added_imageID}}"
+								}
+							]
+						},
+						"description": "Delete uploaded image"
 					},
 					"response": []
 				}
@@ -2561,7 +2933,78 @@
 			"name": "version",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{YOUR-API-KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{endpoint}}v1",
+					"host": [
+						"{{endpoint}}v1"
+					]
+				},
+				"description": "This endpoint makes an HTTP GET request to {{endpoint}} to retrieve some data. The last execution returned a 200 status with a JSON response containing a message and version."
+			},
+			"response": []
+		},
+		{
+			"name": "HEAD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "HEAD",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{YOUR-API-KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{endpoint}}",
+					"host": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPTIONS",
+			"request": {
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{YOUR-API-KEY}}",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{endpoint}}",
 					"host": [
@@ -2595,7 +3038,16 @@
 	"variable": [
 		{
 			"key": "YOUR-API-KEY",
-			"value": "example-api-key"
+			"value": "live_6nDJK6odBUS2dtWkJDdoQmBgmfGP76soZm0kPNheW4uactGsFTS4z6fh6HwrQJgl"
+		},
+		{
+			"key": "EmageIDforAnalysis",
+			"value": ""
+		},
+		{
+			"key": "endpoint",
+			"value": "https://api.thecatapi.com/v1/",
+			"type": "string"
 		}
 	]
 }

@@ -1,0 +1,586 @@
+{
+	"id": "b37f6869-1c6d-4b8b-b8bc-c63b2d7fc435",
+	"name": "The Cat API",
+	"timestamp": "2024-03-10T08:05:59.911Z",
+	"collection_id": "29781400-334f5a6d-a0a7-4575-963f-88c469b3319d",
+	"folder_id": "29781400-5ed42db0-1c9c-4829-8494-749eb548d198",
+	"environment_id": "0",
+	"totalPass": 44,
+	"delay": "10",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-03-10T08:05:46.398Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "f43d54cc-740f-459b-bcec-4487a3064c5a",
+			"name": "/images/search",
+			"url": "https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1",
+			"time": 397,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Check if response has at least one image": true,
+				"Check if the id of getting image saved as a collection variable": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if response has at least one image": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the id of getting image saved as a collection variable": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				397
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Check if response has at least one image": true,
+					"Check if the id of getting image saved as a collection variable": true
+				}
+			]
+		},
+		{
+			"id": "39a52909-b2d5-4f47-9b5d-6e7d24759d8a",
+			"name": "/images/:image_id",
+			"url": "https://api.thecatapi.com/v1/images/gLh13vDBk",
+			"time": 300,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Response is an object with id, url, breeds, width, and height properties": true,
+				"Width and height are non-negative integers": true,
+				"Image URL is a non-empty string and in a valid format": true,
+				"Confirm that the response does not contain any unexpected properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an object with id, url, breeds, width, and height properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Width and height are non-negative integers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Image URL is a non-empty string and in a valid format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Confirm that the response does not contain any unexpected properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				300
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Response is an object with id, url, breeds, width, and height properties": true,
+					"Width and height are non-negative integers": true,
+					"Image URL is a non-empty string and in a valid format": true,
+					"Confirm that the response does not contain any unexpected properties": true
+				}
+			]
+		},
+		{
+			"id": "028624f6-aab5-4614-9bb6-069a37e32ded",
+			"name": "/images/:image_id/analysis",
+			"url": "https://api.thecatapi.com/v1/images/gLh13vDBk",
+			"time": 236,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				236
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true
+				}
+			]
+		},
+		{
+			"id": "c4304271-c338-44dd-ab68-c77ecd48dfe9",
+			"name": "/images/:image_id/info",
+			"url": "https://api.thecatapi.com/v1/images/gLh13vDBk",
+			"time": 240,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Response is an object with id, url, breeds, width, and height properties": true,
+				"Width and height are non-negative integers": true,
+				"Image URL is a non-empty string and in a valid format": true,
+				"Confirm that the response does not contain any unexpected properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an object with id, url, breeds, width, and height properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Width and height are non-negative integers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Image URL is a non-empty string and in a valid format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Confirm that the response does not contain any unexpected properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				240
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Response is an object with id, url, breeds, width, and height properties": true,
+					"Width and height are non-negative integers": true,
+					"Image URL is a non-empty string and in a valid format": true,
+					"Confirm that the response does not contain any unexpected properties": true
+				}
+			]
+		},
+		{
+			"id": "df2f9f07-4c34-4a4b-88c2-610790a95b31",
+			"name": "/images/upload image",
+			"url": "https://api.thecatapi.com/v1/images/upload",
+			"time": 3820,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3820
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "3bd7b0ad-02e3-42b0-b0f8-3af62943bb38",
+			"name": "/images/ check uploaded images",
+			"url": "https://api.thecatapi.com/v1/images/?limit=10&page=0&order=DESC",
+			"time": 663,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Confirm that the image added": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Confirm that the image added": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				663
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Confirm that the image added": true
+				}
+			]
+		},
+		{
+			"id": "daec7568-4c19-4164-81b5-3e441480e43e",
+			"name": "/images/delete image  uploaded",
+			"url": "https://api.thecatapi.com/v1/images/6Msi2wHuG",
+			"time": 347,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				347
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Successful DELETE request": true
+				}
+			]
+		},
+		{
+			"id": "947be628-f6ac-42b2-9bbc-2458676f4bc0",
+			"name": "/images/ check that image deleted",
+			"url": "https://api.thecatapi.com/v1/images/?limit=10&page=0&order=DESC",
+			"time": 492,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Confirm that the image deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Confirm that the image deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				492
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Confirm that the image deleted": true
+				}
+			]
+		},
+		{
+			"id": "65f82b68-bd1a-4a94-a717-e736d2c45edc",
+			"name": "/images/upload",
+			"url": "https://api.thecatapi.com/v1/images/upload",
+			"time": 2336,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2336
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "83f9e964-30d2-498f-b469-1ebd3aaaf77c",
+			"name": "/images/ check uploaded images",
+			"url": "https://api.thecatapi.com/v1/images/?limit=10&page=0&order=DESC",
+			"time": 1027,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Confirm that the image added": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Confirm that the image added": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1027
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Confirm that the image added": true
+				}
+			]
+		},
+		{
+			"id": "0118ed0c-6efa-4527-b43c-86a25054b0d5",
+			"name": "/images/:image_id/breeds",
+			"url": "https://api.thecatapi.com/v1/images/ytvzmpBrw/breeds",
+			"time": 206,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true,
+				"Is breeds array empty": true,
+				"Each breed in the breeds array has specific properties": true,
+				"Each breed's weight has imperial and metric properties": true,
+				"Each breed's weight imperial and metric properties are non-empty strings": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Is breeds array empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each breed in the breeds array has specific properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each breed's weight has imperial and metric properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each breed's weight imperial and metric properties are non-empty strings": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				206
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true,
+					"Is breeds array empty": true,
+					"Each breed in the breeds array has specific properties": true,
+					"Each breed's weight has imperial and metric properties": true,
+					"Each breed's weight imperial and metric properties are non-empty strings": true
+				}
+			]
+		},
+		{
+			"id": "58ee3c8c-55c0-4ac5-90bf-30cd69e50a8b",
+			"name": "/images/delete image  uploaded",
+			"url": "https://api.thecatapi.com/v1/images/ytvzmpBrw",
+			"time": 289,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200 or 201 or 202 or 204": true,
+				"Response should be okay to process": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201 or 202 or 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response should be okay to process": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				289
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201 or 202 or 204": true,
+					"Response should be okay to process": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 10353,
+	"collection": {
+		"requests": [
+			{
+				"id": "f43d54cc-740f-459b-bcec-4487a3064c5a",
+				"method": "GET"
+			},
+			{
+				"id": "39a52909-b2d5-4f47-9b5d-6e7d24759d8a",
+				"method": "GET"
+			},
+			{
+				"id": "028624f6-aab5-4614-9bb6-069a37e32ded",
+				"method": "GET"
+			},
+			{
+				"id": "c4304271-c338-44dd-ab68-c77ecd48dfe9",
+				"method": "GET"
+			},
+			{
+				"id": "df2f9f07-4c34-4a4b-88c2-610790a95b31",
+				"method": "POST"
+			},
+			{
+				"id": "3bd7b0ad-02e3-42b0-b0f8-3af62943bb38",
+				"method": "GET"
+			},
+			{
+				"id": "daec7568-4c19-4164-81b5-3e441480e43e",
+				"method": "DELETE"
+			},
+			{
+				"id": "947be628-f6ac-42b2-9bbc-2458676f4bc0",
+				"method": "GET"
+			},
+			{
+				"id": "65f82b68-bd1a-4a94-a717-e736d2c45edc",
+				"method": "POST"
+			},
+			{
+				"id": "83f9e964-30d2-498f-b469-1ebd3aaaf77c",
+				"method": "GET"
+			},
+			{
+				"id": "0118ed0c-6efa-4527-b43c-86a25054b0d5",
+				"method": "GET"
+			},
+			{
+				"id": "58ee3c8c-55c0-4ac5-90bf-30cd69e50a8b",
+				"method": "DELETE"
+			}
+		]
+	}
+}
